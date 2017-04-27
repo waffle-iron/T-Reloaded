@@ -1,5 +1,4 @@
 import logging
-logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p :', filename='info.log',level=logging.INFO)
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -7,7 +6,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 
-
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+handler = logging.FileHandler('debug.log')
+handler.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 config = {}
 config['baseUrl'] = "https://tesseract-cloud2.co.uk/SC51/SC_Login/aspx/Login_Launch.aspx?source=wn93kn83"
@@ -23,20 +28,24 @@ wait = WebDriverWait(driver, 10)
 
 def login():
     assert "Service Centre Login" in driver.title
-    logging.info('Login page has been found')
+    logger.info('Login page has been found')
 
     database = driver.find_element_by_id('txtDBaseName').get_attribute('value')
-    logging.info('Using database %s', database)
-
-    driver.find_element_by_id('txtUserName').send_keys(config['user'])
-    logging.info('Username is set')
-    driver.find_element_by_id('txtPassword').send_keys(config['pass'])
-    logging.info('password is set')
-
+    logger.info('Using database %s', database)
+    if "Test" in database:
+        logger.critical('Using test database')
+    try:
+        driver.find_element_by_id('txtUserName').send_keys(config['user'])
+        logger.info('Username is set')
+        driver.find_element_by_id('txtPassword').send_keys(config['pass'])
+        logger.info('password is set')
+    except Exception as e:
+        logger.critical('credentials not set')
+        return False
     driver.find_element_by_id('btnsubmit').click()
     wait.until(EC.title_contains('Wincor 5.1'))
-
-    logging.info('Page title is %s', driver.title)
+    logger.info('Page title is %s', driver.title)
+    return True
 
 class job_create_wizard():
     createURL = 'https://tesseract-cloud2.co.uk/SC51/SC_RepairJob/aspx/repairjob_create_wzd.aspx'
@@ -57,10 +66,10 @@ class job_create_wizard():
         try:
             driver.get(job_create_wizard.createURL)
             assert "Welcome the the Repair Job Creation Wizard. Please enter your workshop site code." in driver.page_source
-            logging.INFO("Navigated to create page successfully")
+            logger.info("Navigated to create page successfully")
             return True
         except Exception as e:
-            logging.INFO("Failed to navigate to wizard")
+            logger.info("Failed to navigate to wizard")
             return False
 
     def fill_workshop_site(self):
@@ -71,7 +80,6 @@ class job_create_wizard():
             driver.execute_script("DisplayCombo('cboJobWorkshopSiteNum', 'frmRepairJobCreateWzd');")
             if not self.modal():
                 return false
-
             return True
         except Exception as e:
              return False
