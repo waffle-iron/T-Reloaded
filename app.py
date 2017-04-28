@@ -5,6 +5,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import UnexpectedAlertPresentException
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -21,7 +23,7 @@ config['pass'] = "kieranw"
 config['max_wait_time'] = 10
 config['workshop_site'] = 'STOWS'
 
-driver = webdriver.Firefox()
+driver = webdriver.Chrome()
 driver.get(config['baseUrl'])
 
 wait = WebDriverWait(driver, 10)
@@ -43,8 +45,14 @@ def login():
         logger.critical('credentials not set')
         return False
     driver.find_element_by_id('btnsubmit').click()
-    wait.until(EC.title_contains('Wincor 5.1'))
-    logger.info('Page title is %s', driver.title)
+    try:
+        wait.until(EC.title_contains('Wincor 5.1'))
+        logger.info('Page title is %s', driver.title)
+    except UnexpectedAlertPresentException:
+        alert = driver.switch_to_alert()
+        alert.accept()
+        wait.until(EC.title_contains('Wincor 5.1'))
+        logger.info('Page title is %s', driver.title)
     return True
 
 class job_create_wizard():
