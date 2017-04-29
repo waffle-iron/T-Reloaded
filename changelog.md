@@ -1,3 +1,12 @@
+29/04/2017
+===========
+
+- Started following pep guidelines
+- Restarted login to make it OOP
+- added docstrings or TODO tags where need be
+- Login is functional, but only if you import and run the relevant functions
+this will lead well when concentrating on UX
+
 28/04/2017
 ==========
 
