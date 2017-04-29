@@ -6,6 +6,7 @@
 - added docstrings or TODO tags where need be
 - Login is functional, but only if you import and run the relevant functions
 this will lead well when concentrating on UX
+- added unit tests
 
 28/04/2017
 ==========

@@ -1,4 +1,5 @@
 import logging
+import unittest
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -6,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -25,12 +27,10 @@ config['max_wait_time'] = 10
 config['workshop_site'] = 'STOWS'
 
 driver = webdriver.Firefox()
-
-
 wait = WebDriverWait(driver, 10)
 
 
-class login():
+class Login():
     """
 
     Provides all the functionality you would need for logging into tesseract
@@ -45,10 +45,10 @@ class login():
          found in either then Initialization will fail.
 
         """
-        self.username = self.Username_Set(username)
-        self.password = self.Password_Set(password)
+        self.username = self.__Username_Set(username)
+        self.password = self.__Password_Set(password)
 
-    def Username_Set(self, username=None):
+    def __Username_Set(self, username=None):
         """
 
         Sets username for current instance
@@ -60,7 +60,7 @@ class login():
             return username
         return False
 
-    def Password_Set(self, password=None):
+    def __Password_Set(self, password=None):
         """
 
         Sets password for current instance
@@ -75,7 +75,7 @@ class login():
     def NavigateToLoginAndVerify(self):
         """
 
-        Navigates browser to the login screen. Chhecks database version
+        Navigates browser to the login screen. Checks database version
 
         """
         s = ''
@@ -89,26 +89,45 @@ class login():
         if "Test" in database_value:
             # TODO - Write to logger & console
             pass
-        return
+        return True
 
     def FillUserCredentialsAndSubmit(self):
-        # TODO - docstring
+        """logs user in completely"""
         driver.find_element_by_id('txtUserName').send_keys(self.username)
         driver.find_element_by_id('txtPassword').send_keys(self.password)
         driver.find_element_by_id('btnsubmit').click()
-        self.BypassAlertAndWaitForPage()
+        self.__alert()
 
-    def BypassAlertAndWaitForPage(self):
-        # TODO - docstring
+    def __alert(self):
+        """Deals with alert boxes if they show"""
         try:
-            wait.until(EC.title_contains('Wincor 5.1'))
-            logger.info('Page title is %s', driver.title)
-        except UnexpectedAlertPresentException:
-            alert = driver.switch_to_alert()
+            WebDriverWait(driver, 3).until(EC.alert_is_present())
+            alert = driver.switch_to.alert
             alert.accept()
-            wait.until(EC.title_contains('Wincor 5.1'))
-            logger.info('Page title is %s', driver.title)
-        return True
+        except TimeoutException:
+            pass
+        wait.until(EC.title_contains("Wincor"))
+
+
+class Tests(unittest.TestCase):
+    """ Test cases for T-Reloaded """
+    def setup(self):
+        pass
+
+    def test_login(self):
+        """Tests the login functionality. Ensures a username is found &
+        successfully logged in"""
+        login = Login("kieranw", "kieranw")
+        login.NavigateToLoginAndVerify()
+        login.FillUserCredentialsAndSubmit()
+        self.assertIn("Wincor", driver.title)
+        self.assertIn("kieranw", login.username)
+
+    def tearDown(self):
+        driver.quit()
+
+
+unittest.main()
 
 # class job_create_wizard():
 # createURL = 'https://tesseract-cloud2.co.uk/SC51/SC_RepairJob/aspx/repairjob_create_wzd.aspx'
