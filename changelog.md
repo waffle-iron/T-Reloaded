@@ -1,3 +1,10 @@
+30/04/2017
+===========
+
+- Updated docstrings
+- Began planning out create job
+- rough draft of create job done
+
 29/04/2017
 ===========
 

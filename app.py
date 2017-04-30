@@ -31,28 +31,20 @@ wait = WebDriverWait(driver, 10)
 
 
 class Login():
-    """
+    """Provide functionality need for app login.
 
-    Provides all the functionality you would need for logging into tesseract
-
+    :username: (optional) As string, the users username.
+    :password: (optional) As string, the users password.
     """
 
     def __init__(self, username=None, password=None):
-        """
-
-        Initialization requires a username or password. If no username or
-         password is passed then it will check your config. If no password is
-         found in either then Initialization will fail.
-
-        """
         self.username = self.__Username_Set(username)
         self.password = self.__Password_Set(password)
 
-    def __Username_Set(self, username=None):
-        """
+    def __username_set(self, username=None):
+        """Return username.
 
-        Sets username for current instance
-
+        :username: As string, the users username.
         """
         if not username:
             username = config['user']
@@ -60,11 +52,10 @@ class Login():
             return username
         return False
 
-    def __Password_Set(self, password=None):
-        """
+    def __password_set(self, password=None):
+        """Return password.
 
-        Sets password for current instance
-
+        :password: As string, the users password.
         """
         if not password:
             password = config['pass']
@@ -72,12 +63,8 @@ class Login():
             return password
         return False
 
-    def NavigateToLoginAndVerify(self):
-        """
-
-        Navigates browser to the login screen. Checks database version
-
-        """
+    def navigate_to_login_and_verify(self):
+        """Navigate driver to app login. Verify database."""
         s = ''
         url = s.join(config['baseUrl']
                      + "SC51/SC_Login/aspx/Login_Launch.aspx"
@@ -91,15 +78,15 @@ class Login():
             pass
         return True
 
-    def FillUserCredentialsAndSubmit(self):
-        """logs user in completely"""
+    def fill_user_credentials_and_submit(self):
+        """Login and verify app"""
         driver.find_element_by_id('txtUserName').send_keys(self.username)
         driver.find_element_by_id('txtPassword').send_keys(self.password)
         driver.find_element_by_id('btnsubmit').click()
         self.__alert()
 
     def __alert(self):
-        """Deals with alert boxes if they show"""
+        """Accept alert box"""
         try:
             WebDriverWait(driver, 3).until(EC.alert_is_present())
             alert = driver.switch_to.alert
@@ -107,6 +94,67 @@ class Login():
         except TimeoutException:
             pass
         wait.until(EC.title_contains("Wincor"))
+
+
+class JobCreateWizard():
+    """contains all the functionality needed to navigate the job create
+     wizard."""
+
+    def __init__(self):
+        pass
+
+    def navigate_to_wizard(self):
+        """Navigate browser to create wizard"""
+        pass
+
+    def set_workshop_site(self):
+        """Sets the workshop site in the create job wizard."""
+        pass
+
+    def set_serial_number(self):
+        """Set the serial number in the create job wizard"""
+        pass
+
+    def set_product_code(self):
+        """Set the product code in the create job wizard"""
+        pass
+
+    def set_job_type(self):
+        pass
+
+    def set_flow_code(self):
+        pass
+
+    def set_ro_number(self):
+        pass
+
+    def set_job_site_number(self):
+        pass
+
+    def set_ship_site_number(self):
+        pass
+
+    def set_area(self):
+        pass
+
+    def set_engineer(self):
+        pass
+
+    def set_problem_code(self):
+        pass
+
+    def navigate_modal(self):
+        pass
+
+    def set_problem(self):
+        pass
+
+    def load_next_page(self, complete=False):
+        """Go to next page in create job wizard.
+
+        :complete: As bool, switches between next and finish.
+        """
+        pass
 
 
 class Tests(unittest.TestCase):
@@ -202,8 +250,6 @@ unittest.main()
 
 # create = job_create_wizard("1012400509177", "48014014702632", "PDTMC9090-DC")
 # createJob("1012400509177")
-
-
 
 # elem = driver.find_element_by_name("q")
 # elem.clear()
