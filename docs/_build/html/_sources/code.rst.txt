@@ -1,5 +1,0 @@
-Auto Generated documentation
-============================
-
-.. automodule:: ../app/app.py
-::
