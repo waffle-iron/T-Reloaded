@@ -11,6 +11,9 @@ Welcome to T-Reloaded's documentation!
    :caption: Contents:
 
    changelog.rst
+   code.rst
+
+
 
 Indices and tables
 ==================

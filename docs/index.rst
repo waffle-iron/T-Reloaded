@@ -7,10 +7,13 @@ Welcome to T-Reloaded's documentation!
 ======================================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents:
 
    changelog.rst
+   code.rst
+
+
 
 Indices and tables
 ==================
