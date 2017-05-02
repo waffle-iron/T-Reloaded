@@ -1,3 +1,6 @@
+"""Root of T-Reloaded application
+"""
+
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -18,6 +21,7 @@ class app():
     login = None
 
     def __init__(self):
+        """Initialize all classes"""
         app.driver = webdriver.Firefox()
         app.wait = WebDriverWait(app.driver, 10)
         app.settings = Settings().config
