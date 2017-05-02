@@ -1,8 +1,8 @@
 T-Reloaded is made by K33K00. It is an enhancement suite for Tesseract Stock Control Suite.
 
 .. image:: https://readthedocs.org/projects/t-reloaded/badge/?version=latest
-:target: http://t-reloaded.readthedocs.io/en/latest/?badge=latest
-:alt: Documentation Status
+           :target: http://t-reloaded.readthedocs.io/en/latest/?badge=latest
+           :alt: Documentation Status
 
 
 Requirements
