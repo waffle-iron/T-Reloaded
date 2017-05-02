@@ -1,9 +1,17 @@
-class Login():
-    """
-    Provide functionality need for app login.
+"""Provides all login enhancements
 
-    :username: (optional) As string, the users username.
-    :password: (optional) As string, the users password.
+.. autoclass:: Login
+
+"""
+
+class Login():
+    """ all functionality for login is based within this class
+
+    .. automethod:: navigate_to_login_and_verify
+    .. automethod:: fill_user_credentials_and_submit
+
+    .. note::
+        available via app class *app.login*
     """
 
     def __init__(self):
