@@ -1,21 +1,23 @@
 import os
-import json
-import logging.config
+import logging
+
+file_path = os.path.join(os.path.expanduser('~'), 'reloaded.log')
 
 
-def setup_logging(
-    default_path='logging.json',
-    default_level=logging.INFO,
-):
+logger = logging.getLogger()
+hdlr = logging.FileHandler(file_path)
+logger.setLevel(logging.DEBUG)
 
-    path = default_path
-    if os.path.exists(path):
-        with open(path, 'rt') as f:
-            config = json.load(f)
-        logging.config.dictConfig(config)
-    else:
-        logging.basicConfig(level=default_level)
+# create console handler and set level to debug
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
 
+# create formatter
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+hdlr.setFormatter(formatter)
+logger.addHandler(hdlr)
+# add formatter to ch
+ch.setFormatter(formatter)
 
-logger = setup_logging()
-logger.info("test")
+# add ch to logger
+logger.addHandler(ch)
