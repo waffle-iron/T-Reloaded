@@ -4,6 +4,7 @@ before_script:
     - pip install nose
     - pip install pytest-cov
     - cd /builds/k33k00/T-Reloaded
+    - ls
 configs:
     script:
         nosetests
