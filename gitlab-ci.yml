@@ -1,0 +1,8 @@
+before_script:
+    - apt-get update
+    - printf "[settings]\nbrowser = firefox\nusername = kieranw\npassword = kieranw\nworkshop_site = stows" > ~/.reloaded.cfg
+    - pip install selenium
+
+config:
+    script:
+        python3 reloaded/configs.py

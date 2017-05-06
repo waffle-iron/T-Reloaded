@@ -1,4 +1,7 @@
 """Enhancements for Tesseract login screen"""
+import unittest
+
+from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -17,10 +20,11 @@ def navigate():
                    TESSERACT['DB_SOURCE'])
         if "Service Centre Login" not in driver.title:
             logger.error("Service center not detected")
-            raise SystemExit(TESSERACT.ERROR['NAVIGATION_ERROR'])
+            raise SystemExit(TESSERACT['ERROR']['NAVIGATION_ERROR'])
     except Exception as e:
         logger.error('%s \nnavigation failed', e)
-        raise SystemExit(TESSERACT.ERROR['UNDEFINED'])
+        raise SystemExit(TESSERACT['ERROR']['UNDEFINED'])
+    return True
 
 
 def verify_database():
@@ -31,7 +35,8 @@ def verify_database():
             logger.warning("!!!!!! You are using the test database !!!!!!")
     except Exception as e:
         logger.error('%s\nFailed to verify database', e)
-        raise SystemExit(TESSERACT.ERROR['UNDEFINED'])
+        raise SystemExit(TESSERACT['ERROR']['UNDEFINED'])
+    return True
 
 
 def enter_credentials():
@@ -42,7 +47,8 @@ def enter_credentials():
         elem_password.send_keys(settings['password'])
     except Exception as e:
         logger.error('%s\nFailed to enter credentials', e)
-        raise SystemExit(TESSERACT.ERROR['UNDEFINED'])
+        raise SystemExit(TESSERACT['ERROR']['UNDEFINED'])
+    return True
 
 
 def submit_credentials():
@@ -51,6 +57,7 @@ def submit_credentials():
     try:
         WebDriverWait(driver, 3).until(EC.alert_is_present())
         alert = driver.switch_to.alert
+        logger.debug('Alert is present')
         alert.accept()
     except TimeoutException:
         pass
@@ -59,9 +66,25 @@ def submit_credentials():
         wait.until(EC.title_contains("Wincor"))
     except TimeoutException:
         logger.error('%s\nFailed to login', e)
+    return True
 
 
-navigate()
-verify_database()
-enter_credentials()
-submit_credentials()
+class TestLogin(unittest.TestCase):
+    """Test case for login functionality"""
+
+    def setUp(self):
+        pass
+
+    def test_login_one(self):
+        self.assertTrue(navigate())
+        self.assertTrue(verify_database())
+        self.assertTrue(enter_credentials())
+        self.assertTrue(submit_credentials())
+        driver.get(TESSERACT['URL'] +
+                   'SC51/SC_Login/aspx/Logout_Main.aspx')
+        wait.until(EC.element_to_be_clickable((By.ID, 'btnsubmit')))
+        driver.quit()
+
+
+if __name__ == '__main__':
+    unittest.main()
