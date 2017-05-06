@@ -4,3 +4,7 @@ before_script:
 configs:
     script:
         python reloaded/configs.py
+
+coverage:
+    script:
+        - coverage
