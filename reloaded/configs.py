@@ -59,7 +59,3 @@ def parse_config_file(config_file):
 
 config_file = get_config_file()
 settings = parse_config_file(config_file)
-
-
-if __name__ == '__main__':
-    unittest.main()

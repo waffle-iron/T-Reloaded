@@ -3,9 +3,10 @@ before_script:
     - printf "[settings]\nbrowser = firefox\nusername = kieranw\npassword = kieranw\nworkshop_site = stows" > ~/.reloaded.cfg
     - pip install nose
     - pip install pytest-cov
+    - cd /builds/k33k00/T-Reloaded
 configs:
     script:
-        python reloaded/configs.py
+        nosetests
 
 cover:
     script:
