@@ -2,6 +2,5 @@ image: python:3.5
 before_script:
     - printf "[settings]\nbrowser = firefox\nusername = kieranw\npassword = kieranw\nworkshop_site = stows" > ~/.reloaded.cfg
 configs:
-    coverage: '/Code coverage: \d+\.\d+/'
     script:
         python reloaded/configs.py
