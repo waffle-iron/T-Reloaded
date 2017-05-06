@@ -8,7 +8,6 @@ configs:
         python reloaded/configs.py
 
 cover:
-    coverage:
-        \(zd+.\d+\%\) covered
     script:
         py.test --cov=reloaded
+    coverage: '/\(d+.\d+\%\) covered/'
