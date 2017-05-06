@@ -1,7 +1,5 @@
-before_script:
-    - apt-get update -qy
-    - apt-get install -y python-dev python-pip
-    - pip install selenium
+image: python:3.5
+
 config:
     script:
         python reloaded/configs.py
