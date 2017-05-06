@@ -1,6 +1,13 @@
 image: python:3.5
 before_script:
     - printf "[settings]\nbrowser = firefox\nusername = kieranw\npassword = kieranw\nworkshop_site = stows" > ~/.reloaded.cfg
+    - pip install nose
+    - pip install pytest-cov
 configs:
     script:
         python reloaded/configs.py
+
+cover:
+    coverage: \(zd+.\d+\%\) covered
+    script:
+        py.test --cov=reloaded

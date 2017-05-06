@@ -6,16 +6,14 @@
 import os
 import configparser
 import traceback
-import unittest
 
-from constants import CONFIG
-from logger import logger
+from .constants import CONFIG
+from .logger import logger
 
 
-def get_config_file():
+def get_config_file(file_name='.reloaded.cfg'):
     """Returns config file path"""
 
-    file_name = '.reloaded.cfg'
     file_path = os.path.join(os.path.expanduser('~'), file_name)
     if os.path.isfile(file_path):
         return file_path
@@ -61,18 +59,6 @@ def parse_config_file(config_file):
 
 config_file = get_config_file()
 settings = parse_config_file(config_file)
-
-
-class TestConfig(unittest.TestCase):
-    def setUp(self):
-        pass
-
-    def test_config_read(self):
-        self.assertFalse(not settings['username'])
-        self.assertFalse(not settings['browser'])
-        self.assertFalse(not settings['workshop_site'])
-        self.assertFalse(not settings['password'])
-
 
 
 if __name__ == '__main__':
