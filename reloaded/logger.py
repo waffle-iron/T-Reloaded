@@ -6,7 +6,7 @@ file_path = os.path.join(os.path.expanduser('~'), 'reloaded.log')
 
 logger = logging.getLogger()
 hdlr = logging.FileHandler(file_path)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 # create console handler and set level to debug
 ch = logging.StreamHandler()

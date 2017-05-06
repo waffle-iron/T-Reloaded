@@ -18,29 +18,6 @@ class Login():
         available via app class *app.login*
     """
 
-    def __init__(self, driver):
-        self.driver = driver
-
-    def navigate_to_login_and_verify(self):
-        """
-        Navigate driver to app login. Verify database.
-        """
-        driver = self.driver
-
-        # s = ''
-        # print(settings['sourceString'])
-        # url = s.join(settings['baseUrl']
-        #              + "SC51/SC_Login/aspx/Login_Launch.aspx"
-        #              + settings['sourceString'])
-        # driver.get(url)
-        # assert "Service Centre Login" in driver.title
-        # database_element = driver.find_element_by_id('txtDBaseName')
-        # database_value = database_element.get_attribute('value')
-        # if "Test" in database_value:
-        #     # TODO - Write to logger & console
-        #     pass
-        return True
-
     def fill_user_credentials_and_submit(self):
         """
         Login and verify app.

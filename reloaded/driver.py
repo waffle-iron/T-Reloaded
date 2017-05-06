@@ -28,6 +28,7 @@ def create_driver():
             raise SystemExit(DRIVER['NOT_IN_PATH'])
     else:
         logger.critical('selected browser unavailable')
+    return driver
 
 
 driver = create_driver()
