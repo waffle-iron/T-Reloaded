@@ -2,13 +2,7 @@ import json
 import logging
 import unittest
 
-from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.ui import WebDriverWait
+
 
 with open('config.json') as json_data:
     config = json.load(json_data)
@@ -51,8 +45,8 @@ class Login():
         """
         Login and verify app.
         """
-        driver.find_element_by_id('txtUserName').send_keys(app.settings.username)
-        driver.find_element_by_id('txtPassword').send_keys(app.settings.password)
+        driver.find_element_by_id('txtUserName')send_keys(app.settings.username)
+        driver.find_element_by_id('txtPassword')send_keys(app.settings.password)
         driver.find_element_by_id('btnsubmit').click()
         self.__alert()
 

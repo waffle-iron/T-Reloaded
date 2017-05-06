@@ -1,4 +1,4 @@
-T-Reloaded is made by K33K00. It is an enhancement suite for Tesseract Stock Control Suite.
+T-Reloaded, by K33K00. An enhancement suite for Tesseract Stock Control Suite.
 
 .. image:: https://readthedocs.org/projects/t-reloaded/badge/?version=latest
            :target: http://t-reloaded.readthedocs.io/en/latest/?badge=latest
@@ -8,7 +8,7 @@ T-Reloaded is made by K33K00. It is an enhancement suite for Tesseract Stock Con
 Requirements
 ############
 
-One of the following drivers is required-configuration.
+Requires one of the following drivers.
 
 `Firefox Driver <https://github.com/mozilla/geckodriver/releases>`_
 
@@ -16,10 +16,4 @@ One of the following drivers is required-configuration.
 
 `IE Driver <https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver#required-configuration>`_
 
-At least one driver must be added to PATH
-
-
-Stupid mistakes by tesseract!
-*****************************
-
-typo - Create Job Wizard: 'Welcome the the Repair Job Creation Wizard. Please enter your workshop site code.'
+PATH must contain at least one driver.
