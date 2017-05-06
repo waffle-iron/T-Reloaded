@@ -20,6 +20,6 @@ TESSERACT = {
     'DB_SOURCE': '?source=wn93kn83',
     'URI_LOGIN': 'SC51/SC_Login/aspx/Login_Launch.aspx',
     'ERROR': {
-        'NAVIGATION_ERROR': 301
+        'UNDEFINED': 301,
     }
 }
