@@ -4,4 +4,4 @@ before_script:
     - pip install selenium
 config:
     script:
-        python3 reloaded/configs.py
+        python reloaded/configs.py
