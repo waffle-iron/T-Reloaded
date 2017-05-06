@@ -1,4 +1,4 @@
-import reloaded.configs as configs
+from reloaded import configs
 
 
 def test_config():
