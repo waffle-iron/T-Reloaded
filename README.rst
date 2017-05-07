@@ -1,8 +1,6 @@
 T-Reloaded, by K33K00. An enhancement suite for Tesseract Stock Control Suite.
 
-.. image:: https://readthedocs.org/projects/t-reloaded/badge/?version=latest
-           :target: http://t-reloaded.readthedocs.io/en/latest/?badge=latest
-           :alt: Documentation Status
+.. image:: https://gitlab.com/k33k00/T-Reloaded/badges/master/build.svg
 
 
 Requirements
