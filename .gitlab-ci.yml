@@ -10,7 +10,7 @@ configs:
         nosetests
 
 cover:
-    coverage: '/\(d+.\d+\%\) covered/'
+    coverage: '/TOTAL *\d* *\d* *(\d*)%/'
     script:
         py.test --cov=reloaded
 
