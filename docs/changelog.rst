@@ -1,8 +1,20 @@
+=========
 changelog
-*********
+=========
+********************
+[0.0.1] - 2017/05/08
+********************
 
-3/05/2017
----------
+Added
+=====
+
+- Create wizard navigation
+- Virtual display to tests [May fail tests]
+
+ 3/05/2017
+
+- started
+
 - restructured... again
 
 2/05/2017

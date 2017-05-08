@@ -18,6 +18,7 @@ DRIVER = {
 TESSERACT = {
     'URL': 'https://tesseract-cloud2.co.uk/',
     'DB_SOURCE': '?source=wn93kn83',
+    'URI_CREATE': 'SC51/SC_RepairJob/aspx/repairjob_create_wzd.aspx',
     'URI_LOGIN': 'SC51/SC_Login/aspx/Login_Launch.aspx',
     'ERROR': {
         'UNDEFINED': 301,

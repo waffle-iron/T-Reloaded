@@ -18,48 +18,11 @@ class Login():
         available via app class *app.login*
     """
 
-    def fill_user_credentials_and_submit(self):
-        """
-        Login and verify app.
-        """
-        driver.find_element_by_id('txtUserName')send_keys(app.settings.username)
-        driver.find_element_by_id('txtPassword')send_keys(app.settings.password)
-        driver.find_element_by_id('btnsubmit').click()
-        self.__alert()
-
-    def __alert(self):
-        """
-        Accept alert box.
-        """
-        try:
-            WebDriverWait(driver, 3).until(EC.alert_is_present())
-            alert = driver.switch_to.alert
-            alert.accept()
-        except TimeoutException:
-            pass
-        wait.until(EC.title_contains("Wincor"))
-
-
 class JobCreateWizard():
     """
     contains all the functionality needed to navigate the job create
     wizard.
      """
-
-    def __init__(self):
-        pass
-
-    def navigate_to_wizard(self):
-        """
-        Navigate browser to create wizard.
-        """
-        s = ''
-        url = s.join(config['baseUrl']
-                     + 'SC51/SC_RepairJob/aspx/repairjob_create_wzd.aspx')
-        driver.get(job_create_wizard.url)
-        text = "Welcome the the Repair Job Creation Wizard."
-        assert text in driver.page_source
-        return
 
     def set_workshop_site(self):
         """

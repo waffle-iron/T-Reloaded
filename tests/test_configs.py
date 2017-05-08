@@ -1,5 +1,8 @@
 from reloaded import configs
+from pyvirtualdisplay import Display
 
+vdisplay = Display(visible=0, size=(1024, 768))
+vdisplay.start()
 
 def test_config():
     if configs.get_config_file():

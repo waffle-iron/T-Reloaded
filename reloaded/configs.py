@@ -7,8 +7,8 @@ import os
 import configparser
 import traceback
 
-from .constants import CONFIG
-from .logger import logger
+from constants import CONFIG
+from logger import logger
 
 
 def get_config_file(file_name='.reloaded.cfg'):
